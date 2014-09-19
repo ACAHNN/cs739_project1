@@ -8,6 +8,7 @@ class KeyValueStore:
 		#read from backing store and place into dictionary
 
 	def put(key, value, oldValue):
+		#what is the failure case for this?
 		success = get(key, tmpOldValue)
 		m_keyValues[key] = value
 
@@ -21,5 +22,3 @@ class KeyValueStore:
 			return 0
 		else:
 			return 1 
-x = KeyValueStore("test")
-print "hello world"
