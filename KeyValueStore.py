@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
-KeyValue = {}
+class KeyValueStore:
+	m_keyValues = {}
+	m_backingStore = 0
+	def __init__(self, fileName):
+		m_backingStore = open(fileName, "w+")		
 
-def put(key, value):
-	KeyValue[key] = value;
 
-put("test", "testing")
-put("asdfasfd", "sadfsafff")
-print KeyValue;
+x = KeyValueStore("test")
