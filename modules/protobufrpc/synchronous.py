@@ -127,7 +127,7 @@ class TcpServer( SocketServer.TCPServer ):
 		self.services = {}
 		for s in services:
 			self.services[ s.GetDescriptor().name ] = s
-		self.channel = TcpChannel()
+		#self.channel = TcpChannel()
 		SocketServer.TCPServer.__init__( self, host, TcpRequestHandler )
 
 class TcpRequestHandler( SocketServer.BaseRequestHandler ):
