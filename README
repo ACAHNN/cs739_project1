@@ -3,3 +3,9 @@
 - Test server and client
 TestServer.py
 BasicTest.py
+
+- KeyValueStore.py has been deprecated
+- Server.py has been deprecated
+
+TODO: Failure cases in kvstore.py
+TODO: Write more extensive test cases
