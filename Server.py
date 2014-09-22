@@ -16,7 +16,8 @@ from KeyValueStore import KeyValueStore
 #	def __init__(self, fileName):
 #		self.m_kvs = KVS(fileName)
 
-class KeyValueService (KVService):
+#class KeyValueService (KVService):
+class KeyValueService ():
   
   def __init__(self, filename):
     """

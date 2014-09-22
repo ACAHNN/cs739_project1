@@ -2,6 +2,8 @@
 
 #TODO: Decide the failure models for KeyValueStore and handle them accordingly
 
+#TODO: Add some form of check pointing (where we rewrite the permanent backstore to remove old key value pairs
+
 class KeyValueStore:
 	
 	def __init__(self, fileName):
