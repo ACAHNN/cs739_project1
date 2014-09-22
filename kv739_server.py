@@ -5,12 +5,19 @@ import socket
 import struct
 import SocketServer
 from kvservice_pb2 import *
+from kvstore import *
 
 class kv739_server(SocketServer.TCPServer):
   def __init__(self, host):
     SocketServer.TCPServer.__init__(self, host, TcpRequestHandler)
 
 class TcpRequestHandler(SocketServer.BaseRequestHandler):
+  
+  def __init__(self, request, client_address, server):
+    # TODO: kvstore is hardcoded at the moment
+    self.m_kvs = KeyValueStore('kvstore.txt')      
+    SocketServer.BaseRequestHandler.__init__(self, request, client_address, server)  
+  
   def handle(self):
     while True:
       buffer = self.request.recv(struct.calcsize("!I"))
@@ -39,11 +46,21 @@ class TcpRequestHandler(SocketServer.BaseRequestHandler):
     response = Response()
 
     if request.id == "set":
-      response.result = 0;
-      response.value = ""
+      result, old_value = self.m_kvs.set(request.key, request.value)
+      response.result = result;
+      if old_value:
+        response.value = old_value
+      else:
+        response.value = ""
+    
     elif request.id == "get":
-      response.result = 0
-      response.value = "World"
+      value, result = self.m_kvs.get(request.key)
+      response.result = result
+      if value:
+        response.value = value
+      else:
+        response.value = ""
+    
     else:
       response.result = -1
       response.value = ""
