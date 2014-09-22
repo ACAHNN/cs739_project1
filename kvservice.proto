@@ -1,14 +1,9 @@
 package kvservice;
 
-message GetRequest {
+message Request {
   required string id = 1;
   required string key = 2;
-}
-
-message SetRequest {
-  required string id = 1;
-  required string key = 2;
-  required string value = 3;
+  optional string value = 3;
 }
 
 message Response {

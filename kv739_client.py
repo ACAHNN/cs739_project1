@@ -27,29 +27,29 @@ class kv739_client:
 
     return ret
 
-  def send_buffer(self, buffer):
+  def send_string(self, buffer):
     networkOrderBufferLen = struct.pack("!I", len(buffer))
 
     buffer = networkOrderBufferLen + buffer
     bytesSent = 0
     while bytesSent < len(buffer):
-      sent = self.tcpSocket.send( buffer[ bytesSent: ] )
+      sent = self.tcpSocket.send(buffer[bytesSent:])
       if sent == 0:
         raise RuntimeError( "socket connection broken" )
       bytesSent += sent
 
-  def kv739_get(key):
+  def kv739_get(self, key):
     ret = 0
-    getRequest = GetRequest()
+    getRequest = Request()
     getRequest.id = "get"
     getRequest.key = key
-    send_buffer(getRequest)
+    self.send_string(getRequest.SerializeToString())
 
     buffer = self.tcpSocket.recv(struct.calcsize("!I"))
     if not buffer:
       ret = -1
     else:
-      bufferLen = int(struct.unpack( "!I", buffer )[0])
+      bufferLen = int(struct.unpack("!I", buffer)[0])
       buffer = self.tcpSocket.recv(bufferLen)
       if not buffer:
         ret = -1
@@ -61,19 +61,19 @@ class kv739_client:
     else:
       return [-1, '']
 
-  def kv739_set(key, value):
+  def kv739_set(self, key, value):
     ret = 0
-    setRequest = SetRequest()
-    setRequest.id = "get"
+    setRequest = Request()
+    setRequest.id = "set"
     setRequest.key = key
     setRequest.value = value
-    send_buffer(getRequest)
+    self.send_string(setRequest.SerializeToString())
 
     buffer = self.tcpSocket.recv(struct.calcsize("!I"))
     if not buffer:
       ret = -1
     else:
-      bufferLen = int(struct.unpack( "!I", buffer )[0])
+      bufferLen = int(struct.unpack("!I", buffer)[0])
       buffer = self.tcpSocket.recv(bufferLen)
       if not buffer:
         ret = -1

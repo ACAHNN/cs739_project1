@@ -18,30 +18,37 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='kvservice.proto',
   package='kvservice',
-  serialized_pb=_b('\n\x0fkvservice.proto\x12\tkvservice\"%\n\nGetRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0b\n\x03key\x18\x02 \x02(\t\"4\n\nSetRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0b\n\x03key\x18\x02 \x02(\t\x12\r\n\x05value\x18\x03 \x02(\t\")\n\x08Response\x12\x0e\n\x06result\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x01(\t')
+  serialized_pb=_b('\n\x0fkvservice.proto\x12\tkvservice\"1\n\x07Request\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0b\n\x03key\x18\x02 \x02(\t\x12\r\n\x05value\x18\x03 \x01(\t\")\n\x08Response\x12\x0e\n\x06result\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x01(\t')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
 
-_GETREQUEST = _descriptor.Descriptor(
-  name='GetRequest',
-  full_name='kvservice.GetRequest',
+_REQUEST = _descriptor.Descriptor(
+  name='Request',
+  full_name='kvservice.Request',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='kvservice.GetRequest.id', index=0,
+      name='id', full_name='kvservice.Request.id', index=0,
       number=1, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='key', full_name='kvservice.GetRequest.key', index=1,
+      name='key', full_name='kvservice.Request.key', index=1,
       number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='kvservice.Request.value', index=2,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -58,51 +65,7 @@ _GETREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=30,
-  serialized_end=67,
-)
-
-
-_SETREQUEST = _descriptor.Descriptor(
-  name='SetRequest',
-  full_name='kvservice.SetRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='kvservice.SetRequest.id', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='key', full_name='kvservice.SetRequest.key', index=1,
-      number=2, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='kvservice.SetRequest.value', index=2,
-      number=3, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=69,
-  serialized_end=121,
+  serialized_end=79,
 )
 
 
@@ -138,27 +101,19 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=123,
-  serialized_end=164,
+  serialized_start=81,
+  serialized_end=122,
 )
 
-DESCRIPTOR.message_types_by_name['GetRequest'] = _GETREQUEST
-DESCRIPTOR.message_types_by_name['SetRequest'] = _SETREQUEST
+DESCRIPTOR.message_types_by_name['Request'] = _REQUEST
 DESCRIPTOR.message_types_by_name['Response'] = _RESPONSE
 
-GetRequest = _reflection.GeneratedProtocolMessageType('GetRequest', (_message.Message,), dict(
-  DESCRIPTOR = _GETREQUEST,
+Request = _reflection.GeneratedProtocolMessageType('Request', (_message.Message,), dict(
+  DESCRIPTOR = _REQUEST,
   __module__ = 'kvservice_pb2'
-  # @@protoc_insertion_point(class_scope:kvservice.GetRequest)
+  # @@protoc_insertion_point(class_scope:kvservice.Request)
   ))
-_sym_db.RegisterMessage(GetRequest)
-
-SetRequest = _reflection.GeneratedProtocolMessageType('SetRequest', (_message.Message,), dict(
-  DESCRIPTOR = _SETREQUEST,
-  __module__ = 'kvservice_pb2'
-  # @@protoc_insertion_point(class_scope:kvservice.SetRequest)
-  ))
-_sym_db.RegisterMessage(SetRequest)
+_sym_db.RegisterMessage(Request)
 
 Response = _reflection.GeneratedProtocolMessageType('Response', (_message.Message,), dict(
   DESCRIPTOR = _RESPONSE,
