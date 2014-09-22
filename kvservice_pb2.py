@@ -7,8 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import service as _service
-from google.protobuf import service_reflection
 from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
@@ -20,7 +18,7 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='kvservice.proto',
   package='kvservice',
-  serialized_pb=_b('\n\x0fkvservice.proto\x12\tkvservice\"\x19\n\nGetRequest\x12\x0b\n\x03key\x18\x01 \x02(\t\"(\n\nSetRequest\x12\x0b\n\x03key\x18\x01 \x02(\t\x12\r\n\x05value\x18\x02 \x02(\t\")\n\x08Response\x12\x0e\n\x06result\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x01(\t2q\n\tKVService\x12\x31\n\x03set\x12\x15.kvservice.SetRequest\x1a\x13.kvservice.Response\x12\x31\n\x03get\x12\x15.kvservice.GetRequest\x1a\x13.kvservice.ResponseB\x03\x90\x01\x01')
+  serialized_pb=_b('\n\x0fkvservice.proto\x12\tkvservice\"%\n\nGetRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0b\n\x03key\x18\x02 \x02(\t\"4\n\nSetRequest\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0b\n\x03key\x18\x02 \x02(\t\x12\r\n\x05value\x18\x03 \x02(\t\")\n\x08Response\x12\x0e\n\x06result\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x01(\t')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -35,44 +33,14 @@ _GETREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='kvservice.GetRequest.key', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=30,
-  serialized_end=55,
-)
-
-
-_SETREQUEST = _descriptor.Descriptor(
-  name='SetRequest',
-  full_name='kvservice.SetRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='kvservice.SetRequest.key', index=0,
+      name='id', full_name='kvservice.GetRequest.id', index=0,
       number=1, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='value', full_name='kvservice.SetRequest.value', index=1,
+      name='key', full_name='kvservice.GetRequest.key', index=1,
       number=2, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -89,8 +57,52 @@ _SETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=57,
-  serialized_end=97,
+  serialized_start=30,
+  serialized_end=67,
+)
+
+
+_SETREQUEST = _descriptor.Descriptor(
+  name='SetRequest',
+  full_name='kvservice.SetRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='kvservice.SetRequest.id', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='key', full_name='kvservice.SetRequest.key', index=1,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='kvservice.SetRequest.value', index=2,
+      number=3, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=69,
+  serialized_end=121,
 )
 
 
@@ -126,8 +138,8 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=99,
-  serialized_end=140,
+  serialized_start=123,
+  serialized_end=164,
 )
 
 DESCRIPTOR.message_types_by_name['GetRequest'] = _GETREQUEST
@@ -154,49 +166,6 @@ Response = _reflection.GeneratedProtocolMessageType('Response', (_message.Messag
   # @@protoc_insertion_point(class_scope:kvservice.Response)
   ))
 _sym_db.RegisterMessage(Response)
-
-
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\220\001\001'))
-
-_KVSERVICE = _descriptor.ServiceDescriptor(
-  name='KVService',
-  full_name='kvservice.KVService',
-  file=DESCRIPTOR,
-  index=0,
-  options=None,
-  serialized_start=142,
-  serialized_end=255,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='set',
-    full_name='kvservice.KVService.set',
-    index=0,
-    containing_service=None,
-    input_type=_SETREQUEST,
-    output_type=_RESPONSE,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='get',
-    full_name='kvservice.KVService.get',
-    index=1,
-    containing_service=None,
-    input_type=_GETREQUEST,
-    output_type=_RESPONSE,
-    options=None,
-  ),
-])
-
-KVService = service_reflection.GeneratedServiceType('KVService', (_service.Service,), dict(
-  DESCRIPTOR = _KVSERVICE,
-  __module__ = 'kvservice_pb2'
-  ))
-
-KVService_Stub = service_reflection.GeneratedServiceStubType('KVService_Stub', (KVService,), dict(
-  DESCRIPTOR = _KVSERVICE,
-  __module__ = 'kvservice_pb2'
-  ))
 
 
 # @@protoc_insertion_point(module_scope)

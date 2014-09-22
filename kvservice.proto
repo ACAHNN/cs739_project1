@@ -1,22 +1,17 @@
 package kvservice;
 
-option py_generic_services = true;
-
 message GetRequest {
-	required string key = 1;
+  required string id = 1;
+  required string key = 2;
 }
 
 message SetRequest {
-	required string key = 1;
-	required string value = 2;
+  required string id = 1;
+  required string key = 2;
+  required string value = 3;
 }
 
 message Response {
-	required int32 result = 1;
-	optional string value = 2;
-}
-
-service KVService {
-	rpc set (SetRequest) returns (Response);
-	rpc get (GetRequest) returns (Response);
+  required int32 result = 1;
+  optional string value = 2;
 }
