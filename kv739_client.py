@@ -41,7 +41,7 @@ class kv739_client:
   def kv739_get(self, key):
     ret = 0
     getRequest = Request()
-    getRequest.id = ""    
+    getRequest.id = "1"    
     getRequest.type = "get"
     getRequest.key = key
     self.send_string(getRequest.SerializeToString())
@@ -65,7 +65,7 @@ class kv739_client:
   def kv739_set(self, key, value):
     ret = 0
     setRequest = Request()
-    setRequest.id = ""
+    setRequest.id = "1"
     setRequest.type = "set"
     setRequest.key = key
     setRequest.value = value
