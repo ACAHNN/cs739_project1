@@ -5,7 +5,7 @@ from kv739_client import kv739_client
 import time
 
 if __name__ == "__main__":
-  server_addr = "adelie-02.cs.wisc.edu:"
+  server_addr = "adelie-02.cs.wisc.edu:8000"
   client = kv739_client()
   if client.kv739_init(server_addr) != 0:
     print "Can't connect to Key-Value store server"

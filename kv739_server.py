@@ -45,7 +45,8 @@ class TcpRequestHandler(SocketServer.BaseRequestHandler):
     request = Request()
     request.ParseFromString(data)
     response = Response()
-
+    response.id = request.id
+    
     if request.type == "set":
       print request.key, request.value
       result, old_value = self.m_kvs.set(request.key, request.value)
