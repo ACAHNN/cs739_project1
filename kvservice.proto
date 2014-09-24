@@ -8,6 +8,7 @@ message Request {
 }
 
 message Response {
-  required int32 result = 1;
-  optional string value = 2;
+  required string id = 1
+  required int32 result = 2;
+  optional string value = 3;
 }

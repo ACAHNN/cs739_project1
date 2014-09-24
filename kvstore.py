@@ -11,7 +11,7 @@ class KeyValueStore:
         with open(self.kvstore, 'rb') as kvstore:
             for kvpair in kvstore:
                 key, value = kvpair.strip().split('||')
-            self.m_keyvalues[key] = value
+                self.m_keyvalues[key] = value
 
     
     def _write_kvstore(self, key, value):
