@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='kvservice.proto',
   package='kvservice',
-  serialized_pb='\n\x0fkvservice.proto\x12\tkvservice\"?\n\x07Request\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04type\x18\x02 \x02(\t\x12\x0b\n\x03key\x18\x03 \x02(\t\x12\r\n\x05value\x18\x04 \x01(\t\")\n\x08Response\x12\x0e\n\x06result\x18\x01 \x02(\x05\x12\r\n\x05value\x18\x02 \x01(\t')
+  serialized_pb='\n\x0fkvservice.proto\x12\tkvservice\"?\n\x07Request\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04type\x18\x02 \x02(\t\x12\x0b\n\x03key\x18\x03 \x02(\t\x12\r\n\x05value\x18\x04 \x01(\t\"5\n\x08Response\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0e\n\x06result\x18\x02 \x02(\x05\x12\r\n\x05value\x18\x03 \x01(\t')
 
 
 
@@ -75,15 +75,22 @@ _RESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='result', full_name='kvservice.Response.result', index=0,
-      number=1, type=5, cpp_type=1, label=2,
+      name='id', full_name='kvservice.Response.id', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='result', full_name='kvservice.Response.result', index=1,
+      number=2, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='value', full_name='kvservice.Response.value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      name='value', full_name='kvservice.Response.value', index=2,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -98,7 +105,7 @@ _RESPONSE = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=95,
-  serialized_end=136,
+  serialized_end=148,
 )
 
 DESCRIPTOR.message_types_by_name['Request'] = _REQUEST
