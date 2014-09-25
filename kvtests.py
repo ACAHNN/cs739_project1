@@ -18,7 +18,7 @@ def set_new_stress_test(client, n, b1, b2):
     fail = False
     start_t = time.time()
     lats = []
-    for i in range(1000, n):
+    for i in range(0, n):
         start_l = time.time()
         [ret, old_value] = client.kv739_put((str(i)*b1)[0:128], (str(i)*b2)[0:2048])
         lats.append(time.time()-start_l)
@@ -112,8 +112,8 @@ if __name__ == "__main__":
 
   n = 10000
   k = 5
-  b1 = 128
-  b2 = 2048
+  b1 = 127
+  b2 = 2000
 
   print "Testing Configuration:"
   print "\tn:", n
@@ -121,6 +121,7 @@ if __name__ == "__main__":
   print "\tb1:", b1
   print "\tb2:", b2
   
+  basic_send_recieve_test(client)
   print "------------------------------------------"
   get_nonexisting_stress_test(client, n, b1, b2)
   print "------------------------------------------"  
