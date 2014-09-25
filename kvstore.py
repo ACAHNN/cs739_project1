@@ -10,16 +10,23 @@ class KeyValueStore:
     def _read_kvstore(self):
         with open(self.kvstore, 'rb') as kvstore:
             for kvpair in kvstore:
-                key, value = kvpair.strip().split('||')
+                key, value = kvpair.strip().split('][')
                 self.m_keyvalues[key] = value
 
     
     def _write_kvstore(self, key, value):
         with open(self.kvstore, 'ab') as kvstore:
-            kvstore.write('%s||%s\n' % (key,value))
+            kvstore.write('%s][%s\n' % (key,value))
 
+    # We assume there's no '[' or ']' in key or value, client library needs to enforce that        
     def set(self, key, value):
         old_value, result = self.get(key)
+        # based on requirement, set should return 0 if old_value doesn't exist 
+        if result == 1:
+            result = 0
+        elif result == 0:
+            result = 1
+
         self.m_keyvalues[key] = value
         
         try:
@@ -29,6 +36,7 @@ class KeyValueStore:
         
         return result, old_value
 
+    # We assume there's no '[' or ']' in key or value, client library needs to enforce that   
     def get(self, key):
         try:
             if self.m_keyvalues.has_key(key):

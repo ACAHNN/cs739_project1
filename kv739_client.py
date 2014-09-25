@@ -3,11 +3,16 @@ sys.path.insert(0, './modules')
 
 import socket
 import struct
+import string
 from kvservice_pb2 import *
 
 class kv739_client:
   def __init__(self):
     self.tcpSocket = None
+    self.validCharacters = string.printable.translate(None, '[]')
+
+  def _valid_string(self, testStr):
+    return all(c in self.validCharacters for c in testStr)
 
   def kv739_init(self, server):
     [protocol, address, port] = server.split(':')
@@ -39,6 +44,9 @@ class kv739_client:
       bytesSent += sent
 
   def kv739_get(self, key):
+    if not self._valid_string(key):
+      return [-1, '']
+
     ret = 0
     getRequest = Request()
     getRequest.id = "1"    
@@ -62,7 +70,10 @@ class kv739_client:
     else:
       return [-1, '']
 
-  def kv739_set(self, key, value):
+  def kv739_put(self, key, value):
+    if not self._valid_string(key) or not self._valid_string(value):
+      return [-1, '']
+
     ret = 0
     setRequest = Request()
     setRequest.id = "1"

@@ -2,17 +2,16 @@ from kv739_client import kv739_client
 import time
 
 def basic_send_recieve_test(client):
-  [ret, old_value] = client.kv739_set("hello", "world")
+  [ret, old_value] = client.kv739_put("hello", "world")
   print "ret = " + repr(ret) + ", old_value = " + repr(old_value)
 
   [ret, value] = client.kv739_get("hello")
   print "ret = " + repr(ret) + ", value = " + repr(value)
 
-  time.sleep(5)
+  time.sleep(1)
 
-  [ret, old_value] = client.kv739_set("hello", "haha")
+  [ret, old_value] = client.kv739_put("hello", "haha")
   print "ret = " + repr(ret) + ", old_value = " + repr(old_value)
-
 
 # assumes a new kvstore
 def set_new_stress_test(client, n, b):
