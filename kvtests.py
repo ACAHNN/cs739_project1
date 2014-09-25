@@ -103,7 +103,7 @@ def set_getk_stress_test(client, n, k, b):
 
 
 if __name__ == "__main__":
-  server_addr = "tcp://optimus.cs.wisc.edu:8000"
+  server_addr = "tcp://adelie-01.cs.wisc.edu:8000"
   client = kv739_client()
   if client.kv739_init(server_addr) != 0:
     print "Can't connect to Key-Value store server"
