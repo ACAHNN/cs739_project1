@@ -110,9 +110,9 @@ if __name__ == "__main__":
     print "Can't connect to Key-Value store server"
     exit(1)
 
-  n = 1000
+  n = 10000
   k = 5
-  b = 128
+  b = 1
   
   print "Testing Configuration:"
   print "\tn:", n
