@@ -20,7 +20,7 @@ def set_new_stress_test(client, n, b):
     lats = []
     for i in range(0, n):
         start_l = time.time()
-        [ret, old_value] = client.kv739_set(str(i), (str(i)*b)[0:128])
+        [ret, old_value] = client.kv739_put(str(i), (str(i)*b)[0:128])
         lats.append(time.time()-start_l)
         if int(ret) != 1 or old_value != "":
             fail = True
@@ -38,7 +38,7 @@ def set_existing_stress_test(client, n, b):
     lats = []
     for i in range(0, n):
         start_l = time.time()
-        [ret, old_value] = client.kv739_set(str(i), (str(i)*b)[0:128])
+        [ret, old_value] = client.kv739_put(str(i), (str(i)*b)[0:128])
         lats.append(time.time()-start_l)
         if int(ret) != 0 or old_value != (str(i)*b)[0:128]:
             fail = True
@@ -90,7 +90,7 @@ def set_getk_stress_test(client, n, k, b):
     fail = False
     start_t = time.time()
     for i in range(0, n):
-        [ret, old_value] = client.kv739_set(str(i), (str(i)*b)[0:128])
+        [ret, old_value] = client.kv739_put(str(i), (str(i)*b)[0:128])
         if int(ret) != 0 or old_value != (str(i)*b)[0:128]:  
             fail = True
         for i in range(0, k):

@@ -4,6 +4,7 @@ from kv739_client import kv739_client
 if __name__ == "__main__":
   fake_server_addr = "tcp://xxx.edu:8000"
   #server_addr = "tcp://optimus.cs.wisc.edu:8000"
+
   if not server_addr:
     print "specify the server address"
     exit(1)
@@ -26,15 +27,15 @@ if __name__ == "__main__":
 
   # Verify the behavior of kv739_put() and kv739_get()
   [ret, old_value] = client.kv739_put("hello", "world")
-  if ret != 0 or old_value != "":
-    print "Failed! return value should be 0 because hello/world doesn't exist in store"
+  if ret != 1 or old_value != "":
+    print "Failed! return value should be 1 because hello/world doesn't exist in store"
   else:
     print "Passed"
 
 
   [ret, old_value] = client.kv739_put("hello", "madison")
-  if ret != 1 or old_value != "world":
-    print "Failed! return value should be 1, old_value should be 'world'"
+  if ret != 0 or old_value != "world":
+    print "Failed! return value should be 0, old_value should be 'world'"
   else:
     print "Passed"
 
@@ -76,8 +77,8 @@ if __name__ == "__main__":
 
   # Verify the kv739_put() and kv739_get() can handle parameter with maximum length
   [ret, old_value] = client.kv739_put('h'*128, 'w'*2048)
-  if ret != 0 or old_value != "":
-    print "Failed! return value should be 0"
+  if ret != 1 or old_value != "":
+    print "Failed! return value should be 1"
   else:
     print "Passed"
 

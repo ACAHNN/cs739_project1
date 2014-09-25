@@ -21,12 +21,6 @@ class KeyValueStore:
     # We assume there's no '[' or ']' in key or value, client library needs to enforce that        
     def set(self, key, value):
         old_value, result = self.get(key)
-        # based on requirement, set should return 0 if old_value doesn't exist 
-        if result == 1:
-            result = 0
-        elif result == 0:
-            result = 1
-
         self.m_keyvalues[key] = value
         
         try:
