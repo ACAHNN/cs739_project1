@@ -26,7 +26,6 @@ class TcpRequestHandler(SocketServer.BaseRequestHandler):
         break
 
       bufferLen = int(struct.unpack("!I", buffer)[0])
-      print bufferLen
       buffer = self.request.recv(bufferLen)
       self.buffer_received(buffer)
 
@@ -48,7 +47,6 @@ class TcpRequestHandler(SocketServer.BaseRequestHandler):
     response.id = request.id
     
     if request.type == "set":
-      print request.key, request.value
       result, old_value = self.m_kvs.set(request.key, request.value)
       response.result = result;
       if old_value:
