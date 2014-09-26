@@ -1,5 +1,6 @@
 from kv739_client import kv739_client
 import time
+import random
 
 def basic_send_recieve_test(client):
   [ret, old_value] = client.kv739_put("hello", "world")
@@ -102,6 +103,44 @@ def set_getk_stress_test(client, n, k, b1, b2):
     print "throughput:", ((n*k) / (time.time()-start_t)), "set-kgets/sec"
 
 
+# assumes keys exist
+def random_get_stress_test(client, n, k, b1, b2):
+    fail = False
+    start_t = time.time()
+    lats = []
+    for i in range (0, n):
+        rand_num = random.randrange(0, n)
+        start_l = time.time()
+        [ret, value] = client.kv739_get((str(rand_num)*b1)[0:128])
+        lats.append(time.time()-start_l)
+        if int(ret) != 0 or value != (str(rand_num)*b2)[0:2048]:
+            fail = True
+    print "get_existing_stress_test passed:", not fail
+    print "throughput:", (n / (time.time()-start_t)), "gets/sec"
+    print "latency:"
+    print ("\tmin: %fms, avg: %fms, max: %fms" 
+           % (min(lats)*1000, (sum(lats) / float(len(lats)))*1000, max(lats)*1000))
+
+
+# assumes a warm kvstore
+def random_set_existing_stress_test(client, n, k, b1, b2):
+    fail = False
+    start_t = time.time()
+    lats = []
+    for i in range(0, n):
+        rand_num = random.randrange(0, n)
+        start_l = time.time()
+        [ret, old_value] = client.kv739_put((str(rand_num)*b1)[0:128], (str(rand_num)*b2)[0:2048])
+        lats.append(time.time()-start_l)
+        if int(ret) != 0 or old_value != (str(rand_num)*b2)[0:2048]:
+            fail = True
+    print "set_existing_stress_test passed:", not fail
+    print "throughput:", (n / (time.time()-start_t)), "sets/sec"
+    print "latency:"
+    print ("\tmin: %fms, avg: %fms, max: %fms" 
+           % (min(lats)*1000, (sum(lats) / float(len(lats)))*1000, max(lats)*1000))
+
+
 
 if __name__ == "__main__":
   server_addr = "tcp://adelie-03.cs.wisc.edu:8000"
@@ -112,8 +151,8 @@ if __name__ == "__main__":
 
   n = 10000
   k = 5
-  b1 = 127
-  b2 = 2000
+  b1 = 12
+  b2 = 200
 
   print "Testing Configuration:"
   print "\tn:", n
@@ -121,15 +160,18 @@ if __name__ == "__main__":
   print "\tb1:", b1
   print "\tb2:", b2
   
-  basic_send_recieve_test(client)
+#  basic_send_recieve_test(client)
   print "------------------------------------------"
-  get_nonexisting_stress_test(client, n, b1, b2)
+#  get_nonexisting_stress_test(client, n, b1, b2)
   print "------------------------------------------"  
   set_new_stress_test(client, n, b1, b2)
   print "------------------------------------------"
-  set_existing_stress_test(client, n, b1, b2)
+#  set_existing_stress_test(client, n, b1, b2)
   print "------------------------------------------"
-  get_existing_stress_test(client, n, b1, b2)
+#  get_existing_stress_test(client, n, b1, b2)
   print "------------------------------------------"
-  set_getk_stress_test(client, n, k, b1, b2)
+#  set_getk_stress_test(client, n, k, b1, b2)
   print "------------------------------------------"
+  random_get_stress_test(client, n, k, b1, b2)
+  print "------------------------------------------"
+  random_set_existing_stress_test(client, n, k, b1, b2)
